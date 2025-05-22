@@ -22,6 +22,9 @@
 - Inject metadata into logs before forwarding to external tools like Datadog.
 - Build centralized, enriched log pipelines using OCI Service Connector Hub + Functions.
 
+![Diagrama sin título](https://github.com/user-attachments/assets/4c41c376-1e40-4dbf-91a9-556b60873af6)
+
+
 ## Environment Variables
 
 | Variable Name           | Description                                                                 | Example                       |
