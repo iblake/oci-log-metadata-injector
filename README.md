@@ -6,7 +6,7 @@
 
 **LogFusion** is an Oracle Cloud Function designed to enrich log events by injecting OCI resource metadata into the payload. It helps correlate logs emitted by Kubernetes clusters or OCI services (often with opaque OCIDs) with meaningful information (like tags), improving observability in tools like Datadog or Splunk.
 
-## 🛠Features
+## Features
 
 - **Tag injection** (freeform, defined, system) from OCI.
 - **Dot-path insertion** to nested payloads.
@@ -38,7 +38,7 @@
 
 ---
 
-## ⚙Architecture
+## Architecture
 
 LogFusion expects a JSON payload (single or array) and returns the same payload with a new field containing tag metadata for each OCID found.
 
