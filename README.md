@@ -22,10 +22,20 @@
 - Inject metadata into logs before forwarding to external tools like Datadog.
 - Build centralized, enriched log pipelines using OCI Service Connector Hub + Functions.
 
+## Integration Example: Service Connector Hub
+
+LogFusion is ideal as a **Task Function** between:
+
+- **Source**: Logging (e.g. Load Balancer logs)
+- **Task**: LogFusion (inject metadata)
+- **Target**: Stream / Object Storage / Datadog forwarding function
+
+Use Service Connector Hub to connect these components for an event-driven observability pipeline.
+
 ![Diagrama sin título](https://github.com/user-attachments/assets/4c41c376-1e40-4dbf-91a9-556b60873af6)
 
 
-## Environment Variables
+## Function environment variables
 
 | Variable Name           | Description                                                                 | Example                       |
 |------------------------|-----------------------------------------------------------------------------|-------------------------------|
@@ -197,16 +207,6 @@ We can test the function in CloudShell using a sample log before integrating it 
 ```bash
 cat payload.json | fn invoke <app_name> <function_name>
 ```
-
-## Integration Example: Service Connector Hub
-
-LogFusion is ideal as a **Task Function** between:
-
-- **Source**: Logging (e.g. Load Balancer logs)
-- **Task**: LogFusion (inject metadata)
-- **Target**: Stream / Object Storage / Datadog forwarding function
-
-Use Service Connector Hub to connect these components for an event-driven observability pipeline.
 
 ## 🗺️ Mermaid Diagram — LogFusion Workflow
 
