@@ -13,8 +13,6 @@
 - **Cache control** to reduce OCI API calls.
 - **Environment variable configuration**.
 - **Flexible OCID filtering** by key name.
-- **Stateless JSON in/out, single or bulk logs**.
-- Designed for **OCI Function deployment** with **Resource Principal** or local credentials.
 
 ## Use Cases
 
@@ -30,13 +28,15 @@ LogFusion is ideal as a **Task Function** between:
 - **Task**: LogFusion (inject metadata)
 - **Target**: Stream / Object Storage / Datadog forwarding function
 
-Use Service Connector Hub to connect these components for an event-driven observability pipeline.
+![Overview of Connector Hub](https://docs.oracle.com/en-us/iaas/Content/connector-hub/images/sch-all.svg)
 
-![Diagrama sin título](https://github.com/user-attachments/assets/4c41c376-1e40-4dbf-91a9-556b60873af6)
+Use Service Connector Hub to connect these components for an event-driven observability pipeline.
 
 ## Architecture
 
 LogFusion expects a JSON payload (single or array) and returns the same payload with a new field containing tag metadata for each OCID found.
+
+![Metadata Injector](https://github.com/user-attachments/assets/4c41c376-1e40-4dbf-91a9-556b60873af6)
 
 ## How It Works
 
