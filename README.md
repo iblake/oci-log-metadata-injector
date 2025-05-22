@@ -34,6 +34,18 @@ Use Service Connector Hub to connect these components for an event-driven observ
 
 ![Diagrama sin título](https://github.com/user-attachments/assets/4c41c376-1e40-4dbf-91a9-556b60873af6)
 
+## Architecture
+
+LogFusion expects a JSON payload (single or array) and returns the same payload with a new field containing tag metadata for each OCID found.
+
+## How It Works
+
+1. **Input**: Receives a JSON payload containing one or more OCIDs.
+2. **OCID Extraction**: Recursively walks the JSON to find all OCIDs (optionally filtered by key).
+3. **Tag Query**: For each OCID, uses `oci.resource_search` to retrieve metadata.
+4. **Caching**: Stores results in a TTL-based in-memory cache.
+5. **Metadata Injection**: Adds tag metadata to the designated location in the payload.
+6. **Output**: Returns the updated JSON.
 
 ## Function environment variables
 
@@ -48,21 +60,6 @@ Use Service Connector Hub to connect these components for an event-driven observ
 | `OCID_KEY_FILTER`      | Filter only specific keys in JSON that hold OCIDs                           | `resourceId,lb_ocid`          |
 | `OCI_PROFILE`          | Profile name in local `~/.oci/config` (used for local testing)              | `DEFAULT`                     |
 | `LOG_LEVEL`            | Logging level                                                               | `DEBUG`, `INFO`, `ERROR`, ... |
-
----
-
-## Architecture
-
-LogFusion expects a JSON payload (single or array) and returns the same payload with a new field containing tag metadata for each OCID found.
-
-## How It Works
-
-1. **Input**: Receives a JSON payload containing one or more OCIDs.
-2. **OCID Extraction**: Recursively walks the JSON to find all OCIDs (optionally filtered by key).
-3. **Tag Query**: For each OCID, uses `oci.resource_search` to retrieve metadata.
-4. **Caching**: Stores results in a TTL-based in-memory cache.
-5. **Metadata Injection**: Adds tag metadata to the designated location in the payload.
-6. **Output**: Returns the updated JSON.
 
 ## Sample Input
 
