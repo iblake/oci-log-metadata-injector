@@ -18,7 +18,7 @@
 
 - Annotate Kubernetes Load Balancer logs with application tags.
 - Inject metadata into logs before forwarding to external tools like Datadog.
-- Build centralized, enriched log pipelines using OCI Service Connector Hub + Functions.
+- Build centralized, enriched log pipelines using OCI Service [Connector Hub](https://www.youtube.com/embed/9hPJKO-7VWo?rel=0&autoplay=1) + [Functions](https://www.youtube.com/watch?v=bbaLAC7267g).
 
 ## Integration Example: Service Connector Hub
 
