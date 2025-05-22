@@ -205,7 +205,7 @@ We can test the function in CloudShell using a sample log before integrating it 
 cat payload.json | fn invoke <app_name> <function_name>
 ```
 
-## 🗺️ Mermaid Diagram — LogFusion Workflow
+## Function FlowChart
 
 ```mermaid
 flowchart TD
