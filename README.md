@@ -1,0 +1,1 @@
+# oci-log-metadata-injector
