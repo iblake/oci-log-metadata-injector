@@ -209,20 +209,40 @@ Use Service Connector Hub to connect these components for an event-driven observ
 
 ```mermaid
 flowchart TD
-    A[Incoming Log Payload] --> B{Contains OCIDs?}
-    B -- No --> Z[Return original payload]
-    B -- Yes --> C[Extract OCIDs recursively]
-    C --> D[Check cache for each OCID]
-    D -- Not cached --> E[Query OCI Resource Search]
-    E --> F[Store tags in cache]
-    D -- Cached --> G[Retrieve tags from cache]
-    F --> H[Build tag map per OCID]
+    %% Class Definitions
+    classDef startEnd fill:#e6fffa,stroke:#319795,stroke-width:2px,color:#234e52
+    classDef decision fill:#fefcbf,stroke:#d69e2e,stroke-width:2px,color:#744210
+    classDef process fill:#ebf8ff,stroke:#3182ce,stroke-width:2px,color:#2a4365
+    classDef data fill:#fbd38d,stroke:#dd6b20,stroke-width:2px,color:#7b341e
+    classDef fail fill:#fed7d7,stroke:#e53e3e,stroke-width:2px,color:#742a2a
+
+    %% Nodes
+    A([Incoming Log Payload]):::startEnd
+    B{Contains OCIDs?}:::decision
+    C([Extract OCIDs recursively]):::process
+    D{OCID in cache?}:::decision
+    E([Query OCI Resource Search]):::process
+    F([Store tags in cache]):::data
+    G([Retrieve tags from cache]):::data
+    H([Build tag map per OCID]):::process
+    I([Find insertion point in payload]):::process
+    J([Inject metadata at target path]):::process
+    K([Return updated payload]):::startEnd
+    Z([Return original payload]):::fail
+
+    %% Flow
+    A --> B
+    B -- No --> Z
+    B -- Yes --> C
+    C --> D
+    D -- No --> E
+    E --> F
+    D -- Yes --> G
+    F --> H
     G --> H
-    H --> I[Find insertion point in payload]
-    I --> J[Inject tag metadata at target path]
-    J --> K[Return updated payload to connector]
-    style Z fill:#fdd
-    style K fill:#cfc
+    H --> I
+    I --> J
+    J --> K
 ````
 
 
