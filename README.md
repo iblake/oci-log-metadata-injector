@@ -17,7 +17,7 @@
 ## Use Cases
 
 - Annotate Kubernetes Load Balancer logs with application tags.
-- Inject metadata into logs before forwarding to external tools like Datadog.
+- Inject metadata into logs before forwarding to external tools like [Datadog](https://docs.datadoghq.com/es/integrations/oracle_cloud_infrastructure/?tab=creafvcnconormrecomendado).
 - Build centralized, enriched log pipelines using OCI Service [Connector Hub](https://www.youtube.com/embed/9hPJKO-7VWo?rel=0&autoplay=1) + [Functions](https://www.youtube.com/watch?v=bbaLAC7267g).
 
 ## Integration Example: Service Connector Hub
