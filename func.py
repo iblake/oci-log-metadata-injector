@@ -169,7 +169,6 @@ def handler(ctx, data: io.BytesIO = None):
         raise
 
 # Enables local testing by piping a payload from stdin
-# Example: cat test.json | python3 func.py
 if __name__ == '__main__':
     import sys
     if not sys.stdin.isatty():
