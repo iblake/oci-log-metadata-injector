@@ -38,6 +38,35 @@ LogFusion expects a JSON payload (single or array) and returns the same payload 
 
 ![Metadata Injector](https://github.com/user-attachments/assets/4c41c376-1e40-4dbf-91a9-556b60873af6)
 
+
+## IAM Configuration
+Compartment Setup
+To get started, we'll work with a compartment specifically created for this purpose. Let's assume it's named log-tagging-scope.
+
+### Required Permissions and Access
+Since our Oracle Function will use the OCI SDK to access metadata (like tags) from other resources, it needs the proper identity and access management (IAM) setup.
+
+### Dynamic Group Configuration
+In OCI, functions are treated as IAM resources. To give our Function the right level of access, we must define a dynamic group — for example, log-tagging-group — that targets all Functions deployed within the log-tagging-scope compartment.
+
+Here's a sample rule for the group:
+
+```resource.type = 'fnfunc' and resource.compartment.id = 'ocid1.compartment.oc1..<your-compartment-ocid>'```
+
+### Policy Definitions
+Now we’ll create IAM policies to grant the function permission to query and interact with tagged resources. Depending on your scenario, you may need access to virtual networks, storage buckets, or other services. Below is a policy template you can tailor to your needs:
+
+```bash
+Allow dynamic-group log-meta-fn-group to use tag-namespaces in compartment <your-compartment-name>
+Allow dynamic-group log-meta-fn-group to inspect all-resources in compartment <your-compartment-name>
+Allow dynamic-group log-meta-fn-group to read instances in compartment <your-compartment-name>
+Allow dynamic-group log-meta-fn-group to use search in tenancy
+Allow dynamic-group log-meta-fn-group to read users in tenancy
+Allow dynamic-group log-meta-fn-group to read buckets in compartment <your-compartment-name>
+Allow dynamic-group log-meta-fn-group to manage objects in compartment <your-compartment-name>
+```
+> Adjust these permissions based on your exact use case. For example, if you only enrich logs from Load Balancers, the read instances policy may not be required.
+
 ## How It Works
 
 1. **Input**: Receives a JSON payload containing one or more OCIDs.
